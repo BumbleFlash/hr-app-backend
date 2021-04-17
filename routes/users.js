@@ -1,9 +1,20 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const checkDuplicates = require("../middlewares/verifySignUp");
+const userController = require("../controllers/user_controller");
 
-/* GET users listing. */
-router.get('/', function (req, res, next) {
-    res.send('respond with a resource');
+router.use(function (req, res, next) {
+    res.header(
+        "Access-Control-Allow-Headers",
+        "x-access-token, Origin, Content-Type, Accept"
+    );
+    next();
 });
+
+router.post("/user/registerUser", [
+    checkDuplicates
+], userController.registerUser);
+
+router.post("/user/login", userController.login);
 
 module.exports = router;
