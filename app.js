@@ -8,10 +8,8 @@ const bodyParser = require('body-parser');
 const dbConfig = require("./config/db_config");
 const mongoose = require('mongoose');
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-
 const app = express();
-
+const usersRouter = require('./routes/users');
 mongoose.Promise = global.Promise;
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,7 +22,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api/auth', usersRouter);
 app.use(cors());
 
 // parse requests of content-type - application/json
