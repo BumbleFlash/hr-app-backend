@@ -9,7 +9,8 @@ checkDuplicates = (req, res, next) => {
             return;
         }
         if (user) {
-            res.schema(400).send({message: "Email is already taken"})
+            res.status(400).send({message: "Email is already taken"});
+            return;
         }
         next();
     });

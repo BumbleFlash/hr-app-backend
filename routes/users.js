@@ -15,4 +15,6 @@ router.post("/user/registerUser", [
     checkDuplicates
 ], userController.registerUser);
 
+router.post("/user/login", userController.login);
+
 module.exports = router;
