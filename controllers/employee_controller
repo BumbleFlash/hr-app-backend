@@ -3,7 +3,6 @@ const User = require('../models/user.model');
 
 
 exports.addEmployee = (req, res) => {
-
     const employee = new Employee({
         name: req.body.name,
         email: req.body.email,
@@ -21,6 +20,7 @@ exports.addEmployee = (req, res) => {
             return;
         }
         employee.recruitedBy = [user._id];
+        employee.updatedBy = [user._id];
 
         employee.save((err, employee) => {
             if (err) {
@@ -29,8 +29,13 @@ exports.addEmployee = (req, res) => {
             }
             res.send({
                 message: "Employee entered successfully",
-                id: employee._id,
+                employee: employee
             })
         })
     });
+};
+
+
+exports.updateEmployee = (req, res) => {
+
 };
