@@ -63,7 +63,11 @@ exports.updateEmployee = (req, res) => {
         let updatedEmployee = employee.toObject();
         delete updatedEmployee._id;
 
-        Employee.findOneAndUpdate(query, updatedEmployee, {upsert: true, useFindAndModify: false}, function (err, doc) {
+        Employee.findOneAndUpdate(query, updatedEmployee, {
+            upsert: true,
+            useFindAndModify: false,
+            new: true
+        }, function (err, doc) {
             if (err) {
                 res.status(500).send({message: err});
                 return
@@ -71,7 +75,7 @@ exports.updateEmployee = (req, res) => {
 
             res.status(200).send({
                 message: "Employee updates successfully",
-                employee: updatedEmployee
+                employee: doc
             })
         })
 
