@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 const indexRouter = require('./routes/index');
 const app = express();
 const usersRouter = require('./routes/users');
+const employeeRouter = require('./routes/employee');
 mongoose.Promise = global.Promise;
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/api/auth', usersRouter);
+app.use('/api/employee', employeeRouter);
 app.use(cors());
 
 // parse requests of content-type - application/json
