@@ -16,5 +16,6 @@ router.post("/add", [verifyToken, checkDuplicatesForEmployees], employeeControll
 
 router.put("/update/:id", [verifyToken], employeeController.updateEmployee);
 
+router.get("/all", [verifyToken], employeeController.getAllEmployees);
 
 module.exports = router;
