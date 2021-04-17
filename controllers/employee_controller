@@ -37,5 +37,43 @@ exports.addEmployee = (req, res) => {
 
 
 exports.updateEmployee = (req, res) => {
+    let query = {
+        _id: req.params.id
+    };
 
+    const employee = new Employee({
+        name: req.body.name,
+        email: req.body.email,
+        base_salary: req.body.base_salary,
+        bonus: req.body.bonus,
+        insurance: req.body.insurance,
+        four_o_oneK: req.body.four_o_oneK,
+        total_salary: (req.body.base_salary + req.body.bonus - req.body.insurance - req.body.four_o_oneK)
+    });
+
+    User.findOne({
+        email: req.body.recruitedBy.email
+    }, (err, user) => {
+        if (err) {
+            res.status(500).send({message: err});
+            return;
+        }
+        employee.updatedBy = [user._id];
+
+        let updatedEmployee = employee.toObject();
+        delete updatedEmployee._id;
+
+        Employee.findOneAndUpdate(query, updatedEmployee, {upsert: true, useFindAndModify: false}, function (err, doc) {
+            if (err) {
+                res.status(500).send({message: err});
+                return
+            }
+
+            res.status(200).send({
+                message: "Employee updates successfully",
+                employee: updatedEmployee
+            })
+        })
+
+    });
 };

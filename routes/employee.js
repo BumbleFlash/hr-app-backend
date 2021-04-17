@@ -14,4 +14,7 @@ router.use(function (req, res, next) {
 
 router.post("/add", [verifyToken, checkDuplicatesForEmployees], employeeController.addEmployee);
 
+router.put("/update/:id", [verifyToken], employeeController.updateEmployee);
+
+
 module.exports = router;
