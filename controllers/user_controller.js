@@ -3,6 +3,11 @@ const User = require('../models/user.model');
 var jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
+/**
+ * API to register a user. Password is hashed synchronously using bcrypt.
+ * @param req - Request object
+ * @param res - response object.
+ */
 exports.registerUser = (req, res) => {
 
     const user = new User({
@@ -30,6 +35,11 @@ exports.registerUser = (req, res) => {
     })
 };
 
+/**
+ * API to login an employee. Returns success status if the user is found with the respective password.
+ * @param req - Request object
+ * @param res - response object.
+ */
 exports.login = (req, res) => {
     User.findOne({
         email: req.body.email

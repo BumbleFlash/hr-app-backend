@@ -11,10 +11,12 @@ router.use(function (req, res, next) {
     next();
 });
 
+// POST request to register user.
 router.post("/user/registerUser", [
     checkDuplicates
 ], userController.registerUser);
 
+// POST request to login user.
 router.post("/user/login", userController.login);
 
 module.exports = router;
