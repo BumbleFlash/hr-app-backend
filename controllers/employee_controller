@@ -66,6 +66,10 @@ exports.updateEmployee = (req, res) => {
             res.status(500).send({message: err});
             return;
         }
+        if (!user) {
+            res.status(404).send({message: "User not found"});
+            return;
+        }
         employee.updatedBy = [user._id];
 
         let updatedEmployee = employee.toObject();
