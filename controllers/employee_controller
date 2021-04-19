@@ -1,7 +1,11 @@
 const Employee = require('../models/employee.model');
 const User = require('../models/user.model');
 
-
+/**
+ * API to add employee to the database.
+ * @param req - Request object
+ * @param res - response object.
+ */
 exports.addEmployee = (req, res) => {
     const employee = new Employee({
         name: req.body.name,
@@ -35,7 +39,11 @@ exports.addEmployee = (req, res) => {
     });
 };
 
-
+/**
+ * API to update an employee in the database. Inserts value if employee not found.
+ * @param req - Request object
+ * @param res - response object.
+ */
 exports.updateEmployee = (req, res) => {
     let query = {
         _id: req.params.id
@@ -74,21 +82,24 @@ exports.updateEmployee = (req, res) => {
             }
 
             res.status(200).send({
-                message: "Employee updates successfully",
+                message: "Employee updated successfully",
                 employee: doc
             })
         })
-
     });
 };
 
+/**
+ * API to fetch all employees.
+ * @param req - Request object
+ * @param res - response object.
+ */
 exports.getAllEmployees = (req, res) => {
     Employee.find({}, function (err, employee) {
         if (err) {
             res.status(500).send({message: err});
             return;
         }
-
         res.status(200).send({employees: employee});
     });
 };

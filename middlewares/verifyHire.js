@@ -1,5 +1,11 @@
 const Employee = require('../models/employee.model');
 
+/**
+ * Checks if the employee email id is already present in the database.
+ * @param req - Request object.
+ * @param res - Response object.
+ * @param next - Pattern to pass control to the next middleware function.
+ */
 checkDuplicatesForEmployees = (req, res, next) => {
     Employee.findOne({
         email: req.body.email

@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
 
+/**
+ * Model to store employee information.
+ * @type {Model<Document>}
+ */
 const Employee = mongoose.model("Employee",
     new mongoose.Schema({
         name: String,

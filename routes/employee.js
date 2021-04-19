@@ -12,10 +12,13 @@ router.use(function (req, res, next) {
     next();
 });
 
+// POST request to add employee
 router.post("/add", [verifyToken, checkDuplicatesForEmployees], employeeController.addEmployee);
 
+// PUT request to update employee.
 router.put("/update/:id", [verifyToken], employeeController.updateEmployee);
 
+// GET request to fetch all employees.
 router.get("/all", [verifyToken], employeeController.getAllEmployees);
 
 module.exports = router;
